@@ -5,12 +5,17 @@ const int MAXSIZE = 200006;
 
 struct dsu {
     int comp;
-    int rank[MAXSIZE] = {0};
-    int parent[MAXSIZE] = {0};
+    int rank[MAXSIZE];
+    int parent[MAXSIZE];
 
     dsu(int n)
         : comp(n)
-    { }
+    {
+        for (int i = 0; i < n; ++i) {
+            rank[i] = 0;
+            parent[i] = i;
+        }
+    }
 
     int root(int node)
     {
