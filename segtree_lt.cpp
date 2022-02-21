@@ -4,7 +4,7 @@ using namespace std;
 #define sz(x) (int)(x).size()
 #define ll long long
 
-struct sqrtdec {
+struct segtree {
     size_t size;
     vector<ll> tree;
     int identity = 0;
