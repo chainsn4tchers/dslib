@@ -1,30 +1,36 @@
-#include <bits/stdc++.h>
-
+#include <vector>
 using namespace std;
 
+#define sz(x) (int)(x).size()
 #define ll long long
-const int MXSZ = 1e6;
 
-struct segtree {
-	ll tree[MXSZ] = { 0 };
+struct sqrtdec {
+    size_t size;
+    vector<ll> tree;
+    int identity = 0;
 
-	int init(int idx, unsigned levels)
-	{
-		if (idx > levels) return 0;
-		tree[idx] = max(init(idx * 2 + 1, levels), init(idx * 2 + 2, levels));
-	}
+    // holds range sum by default
+    ll init(int lo, int hi, int idx, vector<ll>& a)
+    {
+        if (lo == hi)
+            return tree[idx] = a[lo];
 
-	void build(ll* a, int n)
-	{
-		unsigned levels = 0;
-		while ((1 << levels) < n) ++levels;
-		--levels;
+        int mid = lo + ((hi - lo) / 2);
+        return tree[idx] = init(lo, mid, (2 * idx) + 1, a) + init(mid + 1, hi, (2 * idx) + 2, a);
+    }
 
-		int j;
-		for (j = levels; j - levels < n; ++j) {
-			tree[j] = a[j - levels];
-		}
+    void build(vector<ll>& a)
+    {
+        init(0, sz(a) - 1, 0, a);
+    }
 
-		init(0, levels);
-	}
+    ll rangeSum(int lo, int hi, int idx, int l, int r)
+    {
+        if (l > r)
+            return identity;
+        if (lo == l && hi == r)
+            return tree[idx];
+        int mid = lo + ((hi - lo) / 2);
+        return rangeSum(lo, mid, (2 * idx) + 1, l, r) + rangeSum(mid + 1, hi, (2 * idx) + 2, l, r);
+    }
 };
