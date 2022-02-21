@@ -29,7 +29,7 @@ struct dsu {
         b = root(b);
         if (a == b) return;
 
-        ++comp;
+        --comp;
         if (rank[a] != rank[b]) {
             if (rank[a] < rank[b])
                 swap(a, b);
