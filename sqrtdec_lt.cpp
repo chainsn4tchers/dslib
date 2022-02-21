@@ -51,7 +51,7 @@ struct sqrtdec {
 
     ll rangeMax(int l, int r)
     {
-        ll res = -0x7fffffffffffffff - 1;
+        ll res = __INT64_MIN__;
         int lblk = l / blockSize;
         int rblk = r / blockSize;
     
