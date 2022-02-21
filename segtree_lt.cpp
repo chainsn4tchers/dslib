@@ -22,7 +22,7 @@ struct segtree {
     {
 		size = 4 * a.size();
 		tree.assign(size + 1, 0);
-        init(0, sz(a) - 1, 0, a);
+	    	init(0, sz(a) - 1, 0, a);
     }
 
     ll rangeSum(int lo, int hi, int idx, int l, int r)
