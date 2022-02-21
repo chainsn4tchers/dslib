@@ -51,5 +51,6 @@ struct trie {
             }
         }
         t->isWord = false;
+        --count;
     }
 };
